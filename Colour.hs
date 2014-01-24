@@ -102,6 +102,7 @@ class Colour a where
   toRGB c = toRGB c . toXYZ c
   toCIELAB :: Context -> a -> CIELAB
   toCIELAB c = toCIELAB c . toXYZ c
+  acc :: a -> Matrix ℝ
 
 instance Colour XYZ where
   toXYZ _ xyz = xyz
@@ -114,14 +115,16 @@ instance Colour XYZ where
     , 200 * (f(y/y') - f(z/z'))
     ]
     where [x,y,z]    = col 1 xyz 
-          [x',y',z'] = col 1 $ (\(XYZ x)-> x) wt
+          [x',y',z'] = col 1 . acc $ wt
           f t | t > (6/29)**3 = t**(1/3)
               | otherwise     = (t/3)*((29/6)**2) + 4/29
+  acc (XYZ xyz) = xyz
 
 instance Colour RGB where
   toXYZ (Space ws) (RGB rgb) = XYZ 
                              $ rgbM ws
                              * rgb
+  acc (RGB rgb) = rgb
 
 instance Colour CIELAB where
   toXYZ (Reference wt) (CIELAB lab) = XYZ . M.fromList . pure $
@@ -130,6 +133,7 @@ instance Colour CIELAB where
     , z' * f'(1/116 * (l+16) - b/200)
     ]
     where [l,a,b] = col 1 lab
-          [x',y',z'] = col 1 $ (\(XYZ x)-> x) wt
+          [x',y',z'] = col 1 . acc $ wt
           f' t | t > 6/29  = t**3
                | otherwise = 3*(6/29)**2 * (t-4/29)
+  acc (CIELAB lab) = lab
