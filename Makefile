@@ -10,5 +10,5 @@ build: setup
 install: build
 	./Setup install
 
-clean: setup
+clean: 
 	git clean -Xfd
