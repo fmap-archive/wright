@@ -1,4 +1,4 @@
-module Data.Colour.White (d65) where
+module Data.Colour.CIE.Illuminant (d65) where
 
 import qualified Numeric.Matrix as M (fromList)
 import Control.Applicative (pure)
