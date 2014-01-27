@@ -1,7 +1,7 @@
 module Data.Colour.RGB.WorkingSpace.AdobeRGB1998 where 
 
 import Data.Colour.Types (Workspace(..), Primary(..))
-import Data.Colour.White (d65)
+import Data.Colour.CIE.Illuminant (d65)
 
 adobeRGB1998 :: Workspace
 adobeRGB1998 = Workspace
