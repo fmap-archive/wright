@@ -1,0 +1,15 @@
+name:                colour
+version:             0.1.0.0
+synopsis:            Colour surjections.
+license:             MIT
+license-file:        LICENSE
+author:              vi
+maintainer:          me@vikramverma.com
+category:            Data
+build-type:          Simple
+cabal-version:       >=1.10
+
+library
+  exposed-modules:     Data.Colour, Data.Colour.White, Data.Colour.Types, Data.Colour.RGB, Data.Colour.RGB.WorkingSpace.AdobeRGB1998, Data.Colour.CIE.XYZ, Data.Colour.CIE.LAB, Control.Applicative.Extra
+  build-depends:       base >=4.6 && <4.7, bed-and-breakfast >=0.4 && <0.5
+  default-language:    Haskell2010
