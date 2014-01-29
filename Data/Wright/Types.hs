@@ -24,3 +24,5 @@ data Primary = Primary
   , y :: ℝ
   , z :: ℝ 
   }
+
+type Chromacity = (ℝ, ℝ)
