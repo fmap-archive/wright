@@ -1,10 +1,7 @@
-module Data.Wright.CIE.Illuminant (d65) where
+module Data.Wright.CIE.Illuminant (environment) where
 
 import qualified Numeric.Matrix as M (Matrix, fromList)
 import Data.Wright.Types (Environment(..), XYZ(..), Chromacity, ℝ)
-
-d65 :: Environment
-d65 = environment (0.31271, 0.32902)
 
 environment :: Chromacity -> Environment
 environment wt = Environment { white = normalise wt }
