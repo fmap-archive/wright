@@ -2,12 +2,8 @@ The specifications of popular RGB working spaces were fetched from a page of
 Bruce Linderbloom's, and written to modules in this directory. To replicate,
 run `coffee README.litcoffee`.
 
-Please note: 
-
-  1. The L-star gamma function, as used in ECI RGB v2, is undefined until
-     I figure out how it works.
-
-  2. The sRGB gamma value is approximate.
+Please note: (1) the L-star gamma function, as used in ECI RGB v2, is undefined
+until I figure out how it works; (2) the sRGB gamma value is approximate.
 
     fs = require 'fs'
     _  = require 'underscore'
