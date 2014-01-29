@@ -8,19 +8,19 @@ import qualified Numeric.Matrix as M (fromList)
 import Data.Colour.RGB.Matrix (m')
 
 class Colour a where
-  toXYZ :: Context -> a -> XYZ
-  toRGB :: Context -> a -> RGB
-  toRGB c = toRGB c . toXYZ c
-  toCIELAB :: Context -> a -> CIELAB
-  toCIELAB c = toCIELAB c . toXYZ c
+  toXYZ :: Environment -> a -> XYZ
+  toRGB :: Environment -> a -> RGB
+  toRGB e = toRGB e . toXYZ e
+  toCIELAB :: Environment -> a -> CIELAB
+  toCIELAB e = toCIELAB e . toXYZ e
   acc :: a -> Matrix ℝ
 
 instance Colour XYZ where
   toXYZ _ xyz = xyz
-  toRGB (Space ws) (XYZ xyz) = RGB 
-                  $ m' ws
+  toRGB env (XYZ xyz) = RGB 
+                  $ m' env
                   * xyz
-  toCIELAB (Reference wt) (XYZ xyz) = CIELAB . M.fromList . pure $
+  toCIELAB (Environment _ wt _ _ _) (XYZ xyz) = CIELAB . M.fromList . pure $
     [ 116 * f(y/y') - 16
     , 500 * (f(x/x') - f(y/y'))
     , 200 * (f(y/y') - f(z/z'))

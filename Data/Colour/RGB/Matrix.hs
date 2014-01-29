@@ -7,7 +7,7 @@ import Control.Applicative ((<$>), pure)
 import Control.Applicative.Extra ((<***>))
 import Data.Colour.Types
 
-m :: Workspace -> Matrix ℝ
+m :: Environment -> Matrix ℝ
 m ws = M.fromList $
   [ [sr*xr, sg*xg, sb*xb]
   , [sr*yr, sg*yg, sb*yb]
@@ -17,10 +17,10 @@ m ws = M.fromList $
            [xg, yg, zg],
            [xb, yb, zb]] = chromCoords ws
 
-m' :: Workspace -> Matrix ℝ
+m' :: Environment -> Matrix ℝ
 m' = fromJust . inv . m
 
-sPoint :: Workspace -> [ℝ]
+sPoint :: Environment -> [ℝ]
 sPoint ws = col 1 
           $ ( fromJust
             . inv
@@ -31,17 +31,17 @@ sPoint ws = col 1
             )
           * whitePoint ws
 
-chromCoords :: Workspace -> [[ℝ]]
+chromCoords :: Environment -> [[ℝ]]
 chromCoords ws = triMax ws 
              <$> [red, green, blue]
 
-whitePoint :: Workspace -> Matrix ℝ
+whitePoint :: Environment -> Matrix ℝ
 whitePoint = M.fromList . map pure . xyzToList . white
 
 xyzToList :: XYZ -> [ℝ]
 xyzToList (XYZ xyz) = concat . M.toList $ xyz
 
 -- Maximum CIE stimulus value for the space in some given dimension.
-triMax :: Workspace -> (Workspace -> Primary) -> [ℝ]
+triMax :: Environment -> (Environment -> Primary) -> [ℝ]
 triMax ws g = [x0/y0 , 1 , (1-x0-y0)/y0]
   where [x0, y0] = [x, y] <***> g ws

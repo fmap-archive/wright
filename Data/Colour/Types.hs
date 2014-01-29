@@ -11,7 +11,7 @@ data CIELAB = CIELAB (Matrix ℝ) deriving (Show)
 
 type White  = XYZ
 
-data Workspace = Workspace
+data Environment = Environment
   { gamma :: ℝ
   , white :: White -- reference white
   , red   :: Primary
@@ -24,6 +24,3 @@ data Primary = Primary
   , y :: ℝ
   , z :: ℝ 
   }
-
-data Context = Reference White 
-             | Space Workspace
