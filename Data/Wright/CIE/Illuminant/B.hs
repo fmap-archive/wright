@@ -1,7 +1,7 @@
 module Data.Wright.CIE.Illuminant.B (b) where
 
-import Data.Wright.Types (Environment)
+import Data.Wright.Types (Model)
 import Data.Wright.CIE.Illuminant (environment)
 
-b :: Environment
+b :: Model
 b = environment (0.34842, 0.35161)

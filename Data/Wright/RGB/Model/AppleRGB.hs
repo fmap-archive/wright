@@ -1,9 +1,9 @@
-module Data.Wright.RGB.Environment.AppleRGB (appleRGB) where
+module Data.Wright.RGB.Model.AppleRGB (appleRGB) where
 
-import Data.Wright.Types (Environment(..), Primary(..))
+import Data.Wright.Types (Model(..), Primary(..))
 import Data.Wright.CIE.Illuminant.D65 (d65)
 
-appleRGB :: Environment
+appleRGB :: Model
 appleRGB = d65
   { gamma = 1.8
   , red   = Primary 0.6250 0.3400 0.244634

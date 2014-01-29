@@ -1,9 +1,9 @@
-module Data.Wright.RGB.Environment.BetaRGB (betaRGB) where
+module Data.Wright.RGB.Model.BetaRGB (betaRGB) where
 
-import Data.Wright.Types (Environment(..), Primary(..))
+import Data.Wright.Types (Model(..), Primary(..))
 import Data.Wright.CIE.Illuminant.D50 (d50)
 
-betaRGB :: Environment
+betaRGB :: Model
 betaRGB = d50
   { gamma = 2.2
   , red   = Primary 0.6888 0.3112 0.303273

@@ -1,9 +1,9 @@
-module Data.Wright.RGB.Environment.NTSCRGB (nTSCRGB) where
+module Data.Wright.RGB.Model.NTSCRGB (nTSCRGB) where
 
-import Data.Wright.Types (Environment(..), Primary(..))
+import Data.Wright.Types (Model(..), Primary(..))
 import Data.Wright.CIE.Illuminant.C (c)
 
-nTSCRGB :: Environment
+nTSCRGB :: Model
 nTSCRGB = c
   { gamma = 2.2
   , red   = Primary 0.6700 0.3300 0.298839

@@ -8,10 +8,10 @@ import qualified Numeric.Matrix as M (fromList)
 import Data.Wright.RGB.Matrix (m')
 
 class Colour a where
-  toXYZ :: Environment -> a -> XYZ
-  toRGB :: Environment -> a -> RGB
+  toXYZ :: Model -> a -> XYZ
+  toRGB :: Model -> a -> RGB
   toRGB e = toRGB e . toXYZ e
-  toCIELAB :: Environment -> a -> CIELAB
+  toCIELAB :: Model -> a -> CIELAB
   toCIELAB e = toCIELAB e . toXYZ e
   acc :: a -> Matrix ℝ
 
@@ -20,7 +20,7 @@ instance Colour XYZ where
   toRGB env (XYZ xyz) = RGB 
                   $ m' env
                   * xyz
-  toCIELAB (Environment _ wt _ _ _) (XYZ xyz) = CIELAB . M.fromList . map pure $
+  toCIELAB (Model _ wt _ _ _) (XYZ xyz) = CIELAB . M.fromList . map pure $
     [ 116 * f(y/y') - 16
     , 500 * (f(x/x') - f(y/y'))
     , 200 * (f(y/y') - f(z/z'))

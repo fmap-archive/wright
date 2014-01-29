@@ -11,7 +11,7 @@ data CIELAB = CIELAB (Matrix ℝ) deriving (Show)
 
 type White  = XYZ
 
-data Environment = Environment
+data Model = Model
   { gamma :: ℝ
   , white :: White -- reference white
   , red   :: Primary

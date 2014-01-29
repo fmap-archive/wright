@@ -24,12 +24,12 @@ until I figure out how it works; (2) the sRGB gamma value is approximate.
       green       = _.values(res)[6..8].map(na).words()
       blue        = _.values(res)[9..11].map(na).words()
       fs.writeFileSync "#{thisModule}.hs", """
-        module Data.Wright.RGB.Environment.#{thisModule} (#{env}) where
+        module Data.Wright.RGB.Model.#{thisModule} (#{env}) where
 
-        import Data.Wright.Types (Environment(..), Primary(..))
+        import Data.Wright.Types (Model(..), Primary(..))
         import Data.Wright.CIE.Illuminant.#{whiteModule} (#{white})
 
-        #{env} :: Environment
+        #{env} :: Model
         #{env} = #{white}
           { gamma = #{gamma}
           , red   = Primary #{red}

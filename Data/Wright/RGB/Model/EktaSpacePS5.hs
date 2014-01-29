@@ -1,9 +1,9 @@
-module Data.Wright.RGB.Environment.EktaSpacePS5 (ektaSpacePS5) where
+module Data.Wright.RGB.Model.EktaSpacePS5 (ektaSpacePS5) where
 
-import Data.Wright.Types (Environment(..), Primary(..))
+import Data.Wright.Types (Model(..), Primary(..))
 import Data.Wright.CIE.Illuminant.D50 (d50)
 
-ektaSpacePS5 :: Environment
+ektaSpacePS5 :: Model
 ektaSpacePS5 = d50
   { gamma = 2.2
   , red   = Primary 0.6950 0.3050 0.260629

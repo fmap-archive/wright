@@ -1,9 +1,9 @@
-module Data.Wright.RGB.Environment.WideGamutRGB (wideGamutRGB) where
+module Data.Wright.RGB.Model.WideGamutRGB (wideGamutRGB) where
 
-import Data.Wright.Types (Environment(..), Primary(..))
+import Data.Wright.Types (Model(..), Primary(..))
 import Data.Wright.CIE.Illuminant.D50 (d50)
 
-wideGamutRGB :: Environment
+wideGamutRGB :: Model
 wideGamutRGB = d50
   { gamma = 2.2
   , red   = Primary 0.7350 0.2650 0.258187

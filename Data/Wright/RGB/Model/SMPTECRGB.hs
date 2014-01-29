@@ -1,9 +1,9 @@
-module Data.Wright.RGB.Environment.SMPTECRGB (sMPTECRGB) where
+module Data.Wright.RGB.Model.SMPTECRGB (sMPTECRGB) where
 
-import Data.Wright.Types (Environment(..), Primary(..))
+import Data.Wright.Types (Model(..), Primary(..))
 import Data.Wright.CIE.Illuminant.D65 (d65)
 
-sMPTECRGB :: Environment
+sMPTECRGB :: Model
 sMPTECRGB = d65
   { gamma = 2.2
   , red   = Primary 0.6300 0.3400 0.212395

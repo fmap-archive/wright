@@ -1,10 +1,10 @@
 module Data.Wright.CIE.Illuminant (environment) where
 
 import qualified Numeric.Matrix as M (Matrix, fromList)
-import Data.Wright.Types (Environment(..), XYZ(..), Chromacity, ℝ)
+import Data.Wright.Types (Model(..), XYZ(..), Chromacity, ℝ)
 
-environment :: Chromacity -> Environment
-environment wt = Environment { white = normalise wt }
+environment :: Chromacity -> Model
+environment wt = Model { white = normalise wt }
 
 -- Normalise (x,y) chromacity coordinates assuming unit luminance.
 normalise :: Chromacity -> XYZ

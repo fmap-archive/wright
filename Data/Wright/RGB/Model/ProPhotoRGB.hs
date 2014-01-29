@@ -1,9 +1,9 @@
-module Data.Wright.RGB.Environment.ProPhotoRGB (proPhotoRGB) where
+module Data.Wright.RGB.Model.ProPhotoRGB (proPhotoRGB) where
 
-import Data.Wright.Types (Environment(..), Primary(..))
+import Data.Wright.Types (Model(..), Primary(..))
 import Data.Wright.CIE.Illuminant.D50 (d50)
 
-proPhotoRGB :: Environment
+proPhotoRGB :: Model
 proPhotoRGB = d50
   { gamma = 1.8
   , red   = Primary 0.7347 0.2653 0.288040

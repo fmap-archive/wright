@@ -1,9 +1,9 @@
-module Data.Wright.RGB.Environment.BestRGB (bestRGB) where
+module Data.Wright.RGB.Model.BestRGB (bestRGB) where
 
-import Data.Wright.Types (Environment(..), Primary(..))
+import Data.Wright.Types (Model(..), Primary(..))
 import Data.Wright.CIE.Illuminant.D50 (d50)
 
-bestRGB :: Environment
+bestRGB :: Model
 bestRGB = d50
   { gamma = 2.2
   , red   = Primary 0.7347 0.2653 0.228457

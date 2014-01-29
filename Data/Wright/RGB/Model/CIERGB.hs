@@ -1,9 +1,9 @@
-module Data.Wright.RGB.Environment.CIERGB (cIERGB) where
+module Data.Wright.RGB.Model.CIERGB (cIERGB) where
 
-import Data.Wright.Types (Environment(..), Primary(..))
+import Data.Wright.Types (Model(..), Primary(..))
 import Data.Wright.CIE.Illuminant.E (e)
 
-cIERGB :: Environment
+cIERGB :: Model
 cIERGB = e
   { gamma = 2.2
   , red   = Primary 0.7350 0.2650 0.176204

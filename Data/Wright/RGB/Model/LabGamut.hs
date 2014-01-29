@@ -1,9 +1,9 @@
-module Data.Wright.RGB.Environment.LabGamut (labGamut) where
+module Data.Wright.RGB.Model.LabGamut (labGamut) where
 
-import Data.Wright.Types (Environment(..), Primary(..))
+import Data.Wright.Types (Model(..), Primary(..))
 import Data.Wright.CIE.Illuminant.D50 (d50)
 
-labGamut :: Environment
+labGamut :: Model
 labGamut = d50
   { gamma = undefined
   , red   = Primary undefined undefined undefined

@@ -12,10 +12,10 @@ README.litcoffee`.
       fs.writeFileSync "#{moduleName}.hs", """
         module Data.Wright.CIE.Illuminant.#{moduleName} (#{functionName}) where
 
-        import Data.Wright.Types (Environment)
+        import Data.Wright.Types (Model)
         import Data.Wright.CIE.Illuminant (environment)
 
-        #{functionName} :: Environment
+        #{functionName} :: Model
         #{functionName} = environment (#{res['x']}, #{res['y']})
       """
 

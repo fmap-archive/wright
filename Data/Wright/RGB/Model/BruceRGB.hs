@@ -1,9 +1,9 @@
-module Data.Wright.RGB.Environment.BruceRGB (bruceRGB) where
+module Data.Wright.RGB.Model.BruceRGB (bruceRGB) where
 
-import Data.Wright.Types (Environment(..), Primary(..))
+import Data.Wright.Types (Model(..), Primary(..))
 import Data.Wright.CIE.Illuminant.D65 (d65)
 
-bruceRGB :: Environment
+bruceRGB :: Model
 bruceRGB = d65
   { gamma = 2.2
   , red   = Primary 0.6400 0.3300 0.240995
