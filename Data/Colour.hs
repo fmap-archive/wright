@@ -20,7 +20,7 @@ instance Colour XYZ where
   toRGB env (XYZ xyz) = RGB 
                   $ m' env
                   * xyz
-  toCIELAB (Environment _ wt _ _ _) (XYZ xyz) = CIELAB . M.fromList . pure $
+  toCIELAB (Environment _ wt _ _ _) (XYZ xyz) = CIELAB . M.fromList . map pure $
     [ 116 * f(y/y') - 16
     , 500 * (f(x/x') - f(y/y'))
     , 200 * (f(y/y') - f(z/z'))
