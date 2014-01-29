@@ -1,4 +1,4 @@
-module Data.Colour.Types where
+module Data.Wright.Types where
 
 import Numeric.Matrix(Matrix(..))
 

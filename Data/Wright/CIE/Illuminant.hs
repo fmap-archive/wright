@@ -1,7 +1,7 @@
-module Data.Colour.CIE.Illuminant (d65) where
+module Data.Wright.CIE.Illuminant (d65) where
 
 import qualified Numeric.Matrix as M (Matrix, fromList)
-import Data.Colour.Types (Environment(..), XYZ(..), ℝ)
+import Data.Wright.Types (Environment(..), XYZ(..), ℝ)
 
 environment :: M.Matrix ℝ -> Environment
 environment wt = Environment { white = XYZ wt }

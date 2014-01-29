@@ -1,8 +1,8 @@
-module Data.Colour.CIE.LAB where
+module Data.Wright.CIE.LAB where
 
-import Data.Colour
-import Data.Colour.Types
-import Data.Colour.CIE.XYZ
+import Data.Wright
+import Data.Wright.Types
+import Data.Wright.CIE.XYZ
 import Numeric.Matrix(col)
 import qualified Numeric.Matrix as M (fromList)
 import Control.Applicative (pure)

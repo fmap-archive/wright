@@ -1,6 +1,6 @@
 default: build
 
-setup: colour.cabal Data Control
+setup: wright.cabal Data Control
 	ghc Setup.hs
 
 build: setup 

@@ -1,7 +1,7 @@
-module Data.Colour.RGB.Environment.AdobeRGB1998 (adobeRGB1998) where 
+module Data.Wright.RGB.Environment.AdobeRGB1998 (adobeRGB1998) where 
 
-import Data.Colour.Types (Environment(..), Primary(..))
-import Data.Colour.CIE.Illuminant (d65)
+import Data.Wright.Types (Environment(..), Primary(..))
+import Data.Wright.CIE.Illuminant (d65)
 
 adobeRGB1998 :: Environment
 adobeRGB1998 = d65

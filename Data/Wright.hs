@@ -1,11 +1,11 @@
-module Data.Colour where
+module Data.Wright where
 
-import Data.Colour.Types
+import Data.Wright.Types
 import Data.Maybe (fromJust)
 import Numeric.Matrix (Matrix(..),col,inv)
 import Control.Applicative (pure)
 import qualified Numeric.Matrix as M (fromList)
-import Data.Colour.RGB.Matrix (m')
+import Data.Wright.RGB.Matrix (m')
 
 class Colour a where
   toXYZ :: Environment -> a -> XYZ

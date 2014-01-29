@@ -1,11 +1,11 @@
-module Data.Colour.RGB.Matrix (m, m') where
+module Data.Wright.RGB.Matrix (m, m') where
 
 import Numeric.Matrix (inv, Matrix(..), col, transpose)
 import qualified Numeric.Matrix as M (fromList, toList)
 import Data.Maybe (fromJust)
 import Control.Applicative ((<$>), pure)
 import Control.Applicative.Extra ((<***>))
-import Data.Colour.Types
+import Data.Wright.Types
 
 m :: Environment -> Matrix ℝ
 m ws = M.fromList $
