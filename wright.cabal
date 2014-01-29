@@ -8,13 +8,12 @@ license:             MIT
 license-file:        LICENSE
 author:              vi
 maintainer:          me@vikramverma.com
--- copyright:           
 category:            Data
 build-type:          Simple
 extra-source-files:  README.md
 cabal-version:       >=1.10
 
 library
-  exposed-modules:     Control.Applicative.Extra, Data.Wright, Data.Wright.RGB, Data.Wright.Types, Data.Wright.CIE.LAB, Data.Wright.CIE.XYZ, Data.Wright.CIE.Illuminant, Data.Wright.CIE.Illuminant.A, Data.Wright.CIE.Illuminant.B, Data.Wright.CIE.Illuminant.C, Data.Wright.CIE.Illuminant.D50, Data.Wright.CIE.Illuminant.D55, Data.Wright.CIE.Illuminant.D65, Data.Wright.CIE.Illuminant.D75, Data.Wright.CIE.Illuminant.E, Data.Wright.CIE.Illuminant.F10, Data.Wright.CIE.Illuminant.F11, Data.Wright.CIE.Illuminant.F12, Data.Wright.CIE.Illuminant.F1, Data.Wright.CIE.Illuminant.F2, Data.Wright.CIE.Illuminant.F3, Data.Wright.CIE.Illuminant.F4, Data.Wright.CIE.Illuminant.F5, Data.Wright.CIE.Illuminant.F6, Data.Wright.CIE.Illuminant.F7, Data.Wright.CIE.Illuminant.F8, Data.Wright.CIE.Illuminant.F9, Data.Wright.RGB.Matrix, Data.Wright.RGB.Environment.AdobeRGB1998
+  exposed-modules:     Control.Applicative.Extra, Data.Wright, Data.Wright.RGB, Data.Wright.Types, Data.Wright.CIE.LAB, Data.Wright.CIE.XYZ, Data.Wright.CIE.Illuminant, Data.Wright.CIE.Illuminant.A, Data.Wright.CIE.Illuminant.B, Data.Wright.CIE.Illuminant.C, Data.Wright.CIE.Illuminant.D50, Data.Wright.CIE.Illuminant.D55, Data.Wright.CIE.Illuminant.D65, Data.Wright.CIE.Illuminant.D75, Data.Wright.CIE.Illuminant.E, Data.Wright.CIE.Illuminant.F10, Data.Wright.CIE.Illuminant.F11, Data.Wright.CIE.Illuminant.F12, Data.Wright.CIE.Illuminant.F1, Data.Wright.CIE.Illuminant.F2, Data.Wright.CIE.Illuminant.F3, Data.Wright.CIE.Illuminant.F4, Data.Wright.CIE.Illuminant.F5, Data.Wright.CIE.Illuminant.F6, Data.Wright.CIE.Illuminant.F7, Data.Wright.CIE.Illuminant.F8, Data.Wright.CIE.Illuminant.F9, Data.Wright.RGB.Matrix, Data.Wright.RGB.Environment.AdobeRGB1998, Data.Wright.RGB.Environment.LabGamut, Data.Wright.RGB.Environment.AppleRGB, Data.Wright.RGB.Environment.BestRGB, Data.Wright.RGB.Environment.BetaRGB, Data.Wright.RGB.Environment.BruceRGB, Data.Wright.RGB.Environment.CIERGB, Data.Wright.RGB.Environment.ColorMatchRGB, Data.Wright.RGB.Environment.DonRGB4, Data.Wright.RGB.Environment.ECIRGBv2, Data.Wright.RGB.Environment.EktaSpacePS5, Data.Wright.RGB.Environment.NTSCRGB, Data.Wright.RGB.Environment.PALSECAMRGB, Data.Wright.RGB.Environment.ProPhotoRGB, Data.Wright.RGB.Environment.SRGB, Data.Wright.RGB.Environment.WideGamutRGB, Data.Wright.RGB.Environment.SMPTECRGB
   build-depends:       base >=4.6 && <4.7, bed-and-breakfast >=0.4 && <0.5
   default-language:    Haskell2010
