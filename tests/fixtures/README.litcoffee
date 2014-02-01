@@ -40,4 +40,4 @@ That's all we need to test functions in any direction.
 
     output = sRGBs.map (rgb) -> [rgb , toXYZ rgb, toLAB rgb].flatten().join(',')
     output = output.join('\n')
-    fs.writeFileSync path.resolve(__dirname, 'table.txt'), output
+    fs.writeFileSync path.resolve(__dirname, 'table.csv'), output
