@@ -5,9 +5,9 @@ import Numeric.Matrix(Matrix(..))
 type ℝ = Double
 
 -- Each three-row vectors:
-data XYZ    = XYZ    (Matrix ℝ) deriving (Show)
-data RGB    = RGB    (Matrix ℝ) deriving (Show)
-data CIELAB = CIELAB (Matrix ℝ) deriving (Show)
+data XYZ    = XYZ    (Matrix ℝ) deriving (Show, Eq)
+data RGB    = RGB    (Matrix ℝ) deriving (Show, Eq)
+data CIELAB = CIELAB (Matrix ℝ) deriving (Show, Eq)
 
 type White  = XYZ
 
