@@ -18,3 +18,4 @@ instance Colour CIELAB where
           f' t | t > 6/29  = t**3
                | otherwise = 3*(6/29)**2 * (t-4/29)
   acc (CIELAB lab) = lab
+  cure = CIELAB

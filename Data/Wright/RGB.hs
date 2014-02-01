@@ -9,3 +9,4 @@ instance Colour RGB where
                              $ m env
                              * rgb
   acc (RGB rgb) = rgb
+  cure = RGB

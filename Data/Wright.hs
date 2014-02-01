@@ -4,8 +4,9 @@ import Data.Wright.Types
 import Data.Maybe (fromJust)
 import Numeric.Matrix (Matrix(..),col,inv)
 import Control.Applicative (pure)
-import qualified Numeric.Matrix as M (fromList)
+import qualified Numeric.Matrix as M (fromList,map)
 import Data.Wright.RGB.Matrix (m')
+
 
 class Colour a where
   toXYZ :: Model -> a -> XYZ
@@ -14,6 +15,10 @@ class Colour a where
   toCIELAB :: Model -> a -> CIELAB
   toCIELAB e = toCIELAB e . toXYZ e
   acc :: a -> Matrix ℝ
+  cure :: Matrix ℝ -> a
+  cmap :: (ℝ -> ℝ) -> a -> a
+  cmap f = cure . M.map f . acc
+
 
 instance Colour XYZ where
   toXYZ _ xyz = xyz
@@ -30,3 +35,4 @@ instance Colour XYZ where
           f t | t > (6/29)**3 = t**(1/3)
               | otherwise     = (t/3)*((29/6)**2) + 4/29
   acc (XYZ xyz) = xyz
+  cure = XYZ

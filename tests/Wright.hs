@@ -1,4 +1,4 @@
-import qualified Numeric.Matrix as M (Matrix(..), fromList, toList)
+import qualified Numeric.Matrix as M (Matrix(..), fromList)
 import Data.Wright (Colour(..))
 import Data.Wright.RGB.Model.SRGB (sRGB)
 import Data.Wright.CIE.LAB ()
