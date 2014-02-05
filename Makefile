@@ -14,7 +14,7 @@ clean:
 	git clean -Xfd
 
 tests: install
-	ghc tests/*.hs
+	ghc -Itests tests/*.hs
 
 test: tests
 	./tests/Wright
