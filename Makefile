@@ -12,3 +12,9 @@ install: build
 
 clean: 
 	git clean -Xfd
+
+tests: install
+	ghc tests/*.hs
+
+test: tests
+	./tests/Wright

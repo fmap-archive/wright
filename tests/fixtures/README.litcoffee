@@ -3,7 +3,7 @@ with the code at <http://www.brucelindbloom.com/javascript/ColorConv.js> (which
 is assumed to be correct and safe.)
 
     [path, fs, _] = ['path', 'fs', 'underscore'].map require
-    library    = path.resolve(__dirname, '..', '..', 'vendor', 'lindbloom', 'ColorConv.js')
+    library       = path.resolve(__dirname, '..', '..', 'vendor', 'lindbloom', 'ColorConv.js')
     eval fs.readFileSync(library, 'utf8')
 
 We consider the translation of 400 SRGB vectors with values scaled to the open
@@ -37,6 +37,5 @@ that set these based on arguments, and recover the set results:
 That's all we need to test functions in any direction.
 
     Array::flatten = () -> _.flatten this
-    output = sRGBs.map (rgb) -> [rgb, toXYZ(rgb), toLAB(rgb)].flatten().join(',')
-    output = output.join('\n')
-    fs.writeFileSync path.resolve(__dirname, 'table.csv'), output
+    lines = sRGBs.map (rgb) -> [rgb, toXYZ(rgb), toLAB(rgb)].flatten().join(',')
+    fs.writeFileSync path.resolve(__dirname, 'table.csv'), lines.join('\n')

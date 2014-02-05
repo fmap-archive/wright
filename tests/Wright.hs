@@ -5,6 +5,9 @@ import Data.Wright.CIE.LAB ()
 import Data.Wright.RGB ()
 import Data.Wright.Types (CIELAB(..), RGB(..), XYZ(..), ℝ)
 import Test.Assert (runAssertions)
+import Control.Applicative ((<$>))
+import System.FilePath (splitFileName)
+import System.Environment (getExecutablePath)
 
 isComma :: Char -> Bool
 isComma = (==',')
@@ -30,6 +33,10 @@ checkConsistency (rgb, xyz, lab) = and
   , rgb == toRGB sRGB lab
   ] 
 
+showDifference :: (RGB, XYZ, CIELAB) -> [ℝ]
+showDifference (rgb, xyz, lab) = undefined
+  where 
+
 fromList :: Colour a => (M.Matrix ℝ -> a) -> [ℝ] -> a
 fromList = (. M.fromList . map return)
 
@@ -48,5 +55,6 @@ assertions s0 = let fixtures = parseFixtures s0 in
   ] 
 
 main :: IO ()
-main = readFile "fixtures/table.csv"
+main = fst . splitFileName <$> getExecutablePath
+   >>= readFile . (++"fixtures/table.csv")
    >>= runAssertions . assertions
