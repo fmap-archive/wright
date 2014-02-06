@@ -8,7 +8,7 @@ class Approximate a where
   (=~) = approx
 
 instance Approximate Double where
-  d0 `approx` d1 = abs (d1-d0) < 1e-4
+  d0 `approx` d1 = abs (d1-d0) < 1e-2
 
 instance (Approximate a, MatrixElement a) => Approximate (Matrix a) where
   m0 `approx` m1 = and $ zipWith approx (z m0) (z m1)
