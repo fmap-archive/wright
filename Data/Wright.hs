@@ -4,9 +4,8 @@ import Data.Wright.Types
 import Data.Maybe (fromJust)
 import Numeric.Matrix (Matrix(..),col,inv)
 import Control.Applicative (pure)
-import qualified Numeric.Matrix as M (fromList,map)
+import qualified Numeric.Matrix as M (fromList,map,col)
 import Data.Wright.RGB.Matrix (m')
-
 
 class Colour a where
   toXYZ :: Model -> a -> XYZ
@@ -19,12 +18,15 @@ class Colour a where
   cmap :: (ℝ -> ℝ) -> a -> a
   cmap f = cure . M.map f . acc
 
+compand :: Gamma -> ℝ -> ℝ
+compand gamma v = case gamma of
+  Gamma g -> v**(1/g)
+  SRGB    -> if v <= 0.0031308 then 12.92*v else 1.055*v**(1/2.4)-0.055
+  LStar   -> let (e, k) = (216/24389,24389/27) in if v <= e then v*k/100 else 1.6*v**(1/3)-0.16
 
 instance Colour XYZ where
   toXYZ _ xyz = xyz
-  toRGB env (XYZ xyz) = RGB 
-                  $ m' env
-                  * xyz
+  toRGB env (XYZ xyz) = RGB $ M.map (compand $ gamma env) (m' env * xyz)
   toCIELAB (Model _ wt _ _ _) (XYZ xyz) = CIELAB . M.fromList . map pure $
     [ 116 * f(y/y') - 16
     , 500 * (f(x/x') - f(y/y'))

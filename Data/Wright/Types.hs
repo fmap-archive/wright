@@ -11,8 +11,10 @@ data CIELAB = CIELAB (Matrix ℝ) deriving (Show, Eq)
 
 type White  = XYZ
 
+data Gamma = Gamma ℝ | LStar | SRGB
+
 data Model = Model
-  { gamma :: ℝ
+  { gamma :: Gamma
   , white :: White -- reference white
   , red   :: Primary
   , green :: Primary
