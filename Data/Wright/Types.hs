@@ -11,6 +11,8 @@ type ℝ = Double
 
 data Gamma = Gamma ℝ | LStar | SRGB
 
+data Application = Graphics | Textiles --CIE94
+
 data Model = Model
   { gamma :: Gamma
   , white :: XYZ ℝ

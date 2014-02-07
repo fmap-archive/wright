@@ -7,6 +7,8 @@ import System.Environment (getExecutablePath)
 import Control.Lens (over, mapped, _2)
 import Approximate (Approximate(..))
 import CSV (parse)
+
+type Fixture = (RGB ℝ, XYZ ℝ, LAB ℝ, Yxy ℝ)
  
 ofLength :: Int -> [a] -> [[a]]
 ofLength n as = if null a then [b] else b : ofLength n a
@@ -15,13 +17,13 @@ ofLength n as = if null a then [b] else b : ofLength n a
 fromList :: (Colour m, Vector m) => [ℝ] -> m ℝ
 fromList = fromVector . toVector
 
-parseFixtures :: String -> [(RGB ℝ, XYZ ℝ, LAB ℝ, Yxy ℝ)]
+parseFixtures :: String -> [Fixture]
 parseFixtures = map parseFixture . parse
  where parseFixture = parseFixture' . ofLength 3 . map read
        parseFixture' [r,x,l,y] = (fromList r, fromList x, fromList l, fromList y)
 
-assertions :: String -> [(String, Bool)]
-assertions s0 = over (mapped . _2) (`all` parseFixtures s0) $
+assertions :: [Fixture] -> [(String, Bool)]
+assertions fs = over (mapped . _2) (`all` fs) $
   [ ("RGB --> XYZ", checkRGB2XYZ)
   , ("XYZ --> RGB", checkXYZ2RGB)
   , ("RGB --> LAB", checkRGB2LAB)
@@ -38,8 +40,8 @@ assertions s0 = over (mapped . _2) (`all` parseFixtures s0) $
 
 main :: IO ()
 main = fst . splitFileName <$> getExecutablePath
-   >>= readFile . (++"fixtures/conv.csv")
-   >>= runAssertions . assertions
+   >>= readFile . (++"fixtures/convert/conv.csv")
+   >>= runAssertions . assertions . parseFixtures
 
 checkRGB2XYZ :: (RGB ℝ, XYZ ℝ, LAB ℝ, Yxy ℝ) -> Bool
 checkRGB2XYZ (rgb, xyz, _, _) = xyz =~ toXYZ sRGB rgb

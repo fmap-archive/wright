@@ -5,6 +5,7 @@ import Data.Wright.Types
 import Data.Vector (fromVector)
 
 instance Colour LAB where
+  toLAB _ = id
   toXYZ (Model _ (XYZ xw yw zw) _ _ _) (LAB l a b) = fromVector $
     ( xw * if fx**3>k then fx**3 else (116*fx-16)
     , yw * if l > 8 then ((l+16)/116)**3 else l/j

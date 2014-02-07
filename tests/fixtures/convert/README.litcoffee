@@ -3,7 +3,7 @@ with the code at <http://www.brucelindbloom.com/javascript/ColorConv.js> (which
 is assumed to be correct and safe.)
 
     [path, fs, _] = ['path', 'fs', 'underscore'].map require
-    library       = path.resolve(__dirname, '..', '..', 'vendor', 'brucelindbloom.com', 'ColorConv.js')
+    library       = path.resolve(__dirname, '..', '..', '..', 'vendor', 'brucelindbloom.com', 'ColorConv.js')
     eval fs.readFileSync(library, 'utf8')
 
 We consider the translation of 400 SRGB vectors with values scaled to the open

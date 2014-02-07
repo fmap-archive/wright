@@ -14,7 +14,8 @@ clean:
 	git clean -Xfd
 
 tests: install
-	ghc -Itests tests/*.hs
+	find tests -name '*hs' | xargs -I+ ghc -itests +
 
 test: tests
-	./tests/Wright
+	./tests/Convert
+	./tests/Diff

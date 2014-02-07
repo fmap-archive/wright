@@ -9,5 +9,6 @@ import Data.Matrix
 import Data.Wright.RGB.Compand (uncompand)
 
 instance Colour RGB where
+  toRGB _ = id
   toXYZ model@(Model γ _ _ _ _) rgb = fromMatrix
                                     $ m model * toMatrix (uncompand γ <$> rgb)

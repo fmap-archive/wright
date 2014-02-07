@@ -5,6 +5,7 @@ import Data.Wright.Colour (Colour(..))
 import Data.Vector (fromVector)
 
 instance Colour Yxy where
+  toYxy _ = id
   toXYZ _ (Yxy y' x y) = fromVector $
     ( x*y'/y
     , y'
