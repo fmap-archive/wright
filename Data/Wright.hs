@@ -2,6 +2,7 @@ module Data.Wright
 ( module Data.Wright.Types
 , module Data.Wright.Colour
 , module Data.Wright.RGB
+, module Data.Wright.RGB.Model
 , module Data.Wright.CIE.XYZ
 , module Data.Wright.CIE.LAB
 , module Data.Wright.CIE.Yxy
