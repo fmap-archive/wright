@@ -30,9 +30,15 @@ instance Vector XYZ where
   toVector (XYZ x y z) = (x, y, z)
   fromVector = uncurry3 XYZ
 
+instance Functor XYZ where
+  fmap = vmap
+
 instance Vector LAB where
   toVector (LAB l a b) = (l, a, b)
   fromVector = uncurry3 LAB
+
+instance Functor LAB where
+  fmap = vmap
 
 instance Vector RGB where
   toVector (RGB r g b) = (r, g, b)
