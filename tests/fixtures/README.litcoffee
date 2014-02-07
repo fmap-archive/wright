@@ -33,9 +33,14 @@ that set these based on arguments, and recover the set results:
       [form.RGB_R, form.RGB_G, form.RGB_B] = rgb.map (v) -> {value: v}
       ButtonRGB(form)
       return [Lab.L, Lab.a, Lab.b]
+    
+    toYxy = (rgb) -> 
+      [form.RGB_R, form.RGB_G, form.RGB_B] = rgb.map (v) -> {value: v}
+      ButtonRGB(form)
+      return [xyY.Y, xyY.x, xyY.y]
 
 That's all we need to test functions in any direction.
 
     Array::flatten = () -> _.flatten this
-    lines = sRGBs.map (rgb) -> [rgb, toXYZ(rgb), toLAB(rgb)].flatten().join(',')
-    fs.writeFileSync path.resolve(__dirname, 'table.csv'), lines.join('\n')
+    lines = sRGBs.map (rgb) -> [rgb, toXYZ(rgb), toLAB(rgb), toYxy(rgb)].flatten().join(',')
+    fs.writeFileSync path.resolve(__dirname, 'conv.csv'), lines.join('\n')

@@ -2,10 +2,10 @@ module Data.Wright.Types where
 
 import Data.Vector (Vector(..), vmap)
 
-data XYZ t = XYZ t t t
-data LAB t = LAB t t t
-data RGB t = RGB t t t
-data Yxy t = Yxy t t t -- "xyY"
+data XYZ t = XYZ t t t deriving (Show)
+data LAB t = LAB t t t deriving (Show)
+data RGB t = RGB t t t deriving (Show)
+data Yxy t = Yxy t t t deriving (Show) -- "xyY"
 
 type ℝ = Double
 
