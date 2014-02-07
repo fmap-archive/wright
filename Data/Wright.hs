@@ -41,6 +41,7 @@ module Data.Wright
 , module Data.Wright.RGB.Model.SMPTECRGB
 , module Data.Wright.RGB.Model.SRGB
 , module Data.Wright.RGB.Model.WideGamutRGB
+, module Data.Wright.CIE.DeltaE
 ) where
 
 import  Data.Wright.Colour
@@ -85,3 +86,4 @@ import  Data.Wright.RGB.Model.ProPhotoRGB
 import  Data.Wright.RGB.Model.SMPTECRGB
 import  Data.Wright.RGB.Model.SRGB
 import  Data.Wright.RGB.Model.WideGamutRGB
+import  Data.Wright.CIE.DeltaE
