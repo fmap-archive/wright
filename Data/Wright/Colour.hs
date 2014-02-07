@@ -13,6 +13,8 @@ class Colour m where
   toLAB m = toLAB m . toXYZ m
   toRGB :: Model -> m ℝ -> RGB ℝ
   toRGB m = toRGB m . toXYZ m
+  toYxy :: Model -> m ℝ -> Yxy ℝ
+  toYxy m = toYxy m . toXYZ m
 
 instance Colour XYZ where
   toXYZ _ = id
@@ -26,3 +28,8 @@ instance Colour XYZ where
     where [xf, yf, zf] = map f [x/xw,y/yw,z/zw]
           f t | t > (6/29)**3 = t**(1/3)
               | otherwise     = (t/3)*((29/6)**2) + 4/29
+  toYxy _ (XYZ x y z) = fromVector $
+    ( y
+    , x/d
+    , y/d
+    ) where d = x+y+z

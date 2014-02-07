@@ -5,6 +5,7 @@ import Data.Vector (Vector(..), vmap)
 data XYZ t = XYZ t t t
 data LAB t = LAB t t t
 data RGB t = RGB t t t
+data Yxy t = Yxy t t t -- "xyY"
 
 type ℝ = Double
 
@@ -23,8 +24,6 @@ data Primary = Primary
   , y :: ℝ
   , z :: ℝ 
   }
-
-type Chromacity = (ℝ, ℝ)
 
 instance Vector XYZ where
   toVector (XYZ x y z) = (x, y, z)
@@ -45,6 +44,13 @@ instance Vector RGB where
   fromVector = uncurry3 RGB
 
 instance Functor RGB where
+  fmap = vmap
+
+instance Vector Yxy where
+  toVector (Yxy y' x y) = (y', x, y)
+  fromVector = uncurry3 Yxy
+
+instance Functor Yxy where
   fmap = vmap
 
 uncurry3 :: (a -> b -> c -> d) -> (a, b, c) -> d

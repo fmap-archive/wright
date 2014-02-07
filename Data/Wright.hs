@@ -4,6 +4,7 @@ module Data.Wright
 , module Data.Wright.RGB
 , module Data.Wright.CIE.XYZ
 , module Data.Wright.CIE.LAB
+, module Data.Wright.CIE.Yxy
 , module Data.Wright.CIE.Illuminant.A
 , module Data.Wright.CIE.Illuminant.B
 , module Data.Wright.CIE.Illuminant.C
@@ -33,6 +34,7 @@ import  Data.Wright.RGB
 import  Data.Wright.RGB.Model
 import  Data.Wright.CIE.XYZ
 import  Data.Wright.CIE.LAB
+import  Data.Wright.CIE.Yxy
 import  Data.Wright.CIE.Illuminant.A
 import  Data.Wright.CIE.Illuminant.B
 import  Data.Wright.CIE.Illuminant.C
