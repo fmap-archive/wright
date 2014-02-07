@@ -1,13 +1,14 @@
 module Data.Wright.RGB.Matrix (m, m') where
 
-import Numeric.Matrix (inv, Matrix(..), col, transpose)
-import qualified Numeric.Matrix as M (fromList, toList)
+import Data.Matrix
+import Numeric.Matrix (inv, col, transpose)
+import qualified Numeric.Matrix as M (Matrix(..), fromList, toList)
 import Data.Maybe (fromJust)
 import Control.Applicative ((<$>), pure)
 import Control.Applicative.Extra ((<***>))
 import Data.Wright.Types
 
-m :: Model -> Matrix ℝ
+m :: Model -> M.Matrix ℝ
 m ws = M.fromList $
   [ [sr*xr, sg*xg, sb*xb]
   , [sr*yr, sg*yg, sb*yb]
@@ -17,7 +18,7 @@ m ws = M.fromList $
            [xg, yg, zg],
            [xb, yb, zb]] = chromCoords ws
 
-m' :: Model -> Matrix ℝ
+m' :: Model -> M.Matrix ℝ
 m' = fromJust . inv . m
 
 sPoint :: Model -> [ℝ]
@@ -32,14 +33,10 @@ sPoint ws = col 1
           * whitePoint ws
 
 chromCoords :: Model -> [[ℝ]]
-chromCoords ws = triMax ws 
-             <$> [red, green, blue]
+chromCoords ws = triMax ws `map` [red, green, blue]
 
-whitePoint :: Model -> Matrix ℝ
-whitePoint = M.fromList . map pure . xyzToList . white
-
-xyzToList :: XYZ -> [ℝ]
-xyzToList (XYZ xyz) = concat . M.toList $ xyz
+whitePoint :: Model -> M.Matrix ℝ
+whitePoint = toMatrix . white
 
 -- Maximum CIE stimulus value for the space in some given dimension.
 triMax :: Model -> (Model -> Primary) -> [ℝ]

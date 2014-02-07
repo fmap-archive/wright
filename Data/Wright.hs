@@ -1,40 +1,28 @@
 module Data.Wright where
 
 import Data.Wright.Types
-import Data.Maybe (fromJust)
-import Numeric.Matrix (Matrix(..),col,inv)
-import Control.Applicative (pure)
-import qualified Numeric.Matrix as M (fromList,map,col)
+import qualified Numeric.Matrix as M (map)
 import Data.Wright.RGB.Matrix (m')
+import Data.Vector (fromVector)
+import Data.Matrix (toMatrix, fromMatrix)
+import Data.Wright.RGB.Compand (compand)
 
-class Colour a where
-  toXYZ :: Model -> a -> XYZ
-  toRGB :: Model -> a -> RGB
-  toRGB e = toRGB e . toXYZ e
-  toCIELAB :: Model -> a -> CIELAB
-  toCIELAB e = toCIELAB e . toXYZ e
-  acc :: a -> Matrix ℝ
-  cure :: Matrix ℝ -> a
-  cmap :: (ℝ -> ℝ) -> a -> a
-  cmap f = cure . M.map f . acc
-
-compand :: Gamma -> ℝ -> ℝ
-compand gamma v = case gamma of
-  Gamma g -> v**(1/g)
-  SRGB    -> if v <= 0.0031308 then 12.92*v else 1.055*v**(1/2.4)-0.055
-  LStar   -> let (e, k) = (216/24389,24389/27) in if v <= e then v*k/100 else 1.6*v**(1/3)-0.16
+class Colour m where
+  toXYZ :: Model -> m ℝ -> XYZ ℝ
+  toLAB :: Model -> m ℝ -> LAB ℝ
+  toLAB m = toLAB m . toXYZ m
+  toRGB :: Model -> m ℝ -> RGB ℝ
+  toRGB m = toRGB m . toXYZ m
 
 instance Colour XYZ where
-  toXYZ _ xyz = xyz
-  toRGB env (XYZ xyz) = RGB $ M.map (compand $ gamma env) (m' env * xyz)
-  toCIELAB (Model _ wt _ _ _) (XYZ xyz) = CIELAB . M.fromList . map pure $
-    [ 116 * f(y/y') - 16
-    , 500 * (f(x/x') - f(y/y'))
-    , 200 * (f(y/y') - f(z/z'))
-    ]
-    where [x,y,z]    = col 1 xyz 
-          [x',y',z'] = col 1 . acc $ wt
+  toXYZ _ = id
+  toRGB model@(Model γ _ _ _ _) xyz = fromMatrix
+                                    $ compand γ `M.map` (m' model * toMatrix xyz)
+  toLAB (Model _ (XYZ xw yw zw) _ _ _) (XYZ x y z) = fromVector $
+    ( 116 * yf - 16
+    , 500 * (xf - yf)
+    , 200 * (yf - zf)
+    )
+    where [xf, yf, zf] = map f [x/xw,y/yw,z/zw]
           f t | t > (6/29)**3 = t**(1/3)
               | otherwise     = (t/3)*((29/6)**2) + 4/29
-  acc (XYZ xyz) = xyz
-  cure = XYZ

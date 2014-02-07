@@ -1,6 +1,11 @@
+{-# LANGUAGE FlexibleInstances #-}
+
 module Approximate where
 
+import Data.Wright
+import Data.Vector
 import Numeric.Matrix (Matrix, MatrixElement, toList)
+import Data.Function (on)
 
 class Approximate a where
   approx :: a -> a -> Bool
@@ -10,9 +15,6 @@ class Approximate a where
 instance Approximate Double where
   d0 `approx` d1 = abs (d1-d0) < 0.11
 
-instance (Approximate a, MatrixElement a) => Approximate (Matrix a) where
-  m0 `approx` m1 = and $ zipWith approx (z m0) (z m1)
-    where z = concat . toList
-
---instance (Colour a) => (Approximate a) where
---  c0 `approx` c1 = acc c0 `approx` acc c1
+instance (Vector a, Approximate b) => Approximate (a b) where
+  v0 `approx` v1 = (toVector v0) ~~ (toVector v1)
+    where (a0,b0,c0) ~~ (a1,b1,c1) = and $ zipWith (=~) [a0,b0,c0] [a1,b1,c1]

@@ -1,21 +1,18 @@
 module Data.Wright.Types where
 
-import Numeric.Matrix(Matrix(..))
+import Data.Vector (Vector(..), vmap)
+
+data XYZ t = XYZ t t t
+data LAB t = LAB t t t
+data RGB t = RGB t t t
 
 type ℝ = Double
-
--- Each three-row vectors:
-data XYZ    = XYZ    (Matrix ℝ) deriving (Show, Eq)
-data RGB    = RGB    (Matrix ℝ) deriving (Show, Eq)
-data CIELAB = CIELAB (Matrix ℝ) deriving (Show, Eq)
-
-type White  = XYZ
 
 data Gamma = Gamma ℝ | LStar | SRGB
 
 data Model = Model
   { gamma :: Gamma
-  , white :: White -- reference white
+  , white :: XYZ ℝ
   , red   :: Primary
   , green :: Primary
   , blue  :: Primary
@@ -28,3 +25,21 @@ data Primary = Primary
   }
 
 type Chromacity = (ℝ, ℝ)
+
+instance Vector XYZ where
+  toVector (XYZ x y z) = (x, y, z)
+  fromVector = uncurry3 XYZ
+
+instance Vector LAB where
+  toVector (LAB l a b) = (l, a, b)
+  fromVector = uncurry3 LAB
+
+instance Vector RGB where
+  toVector (RGB r g b) = (r, g, b)
+  fromVector = uncurry3 RGB
+
+instance Functor RGB where
+  fmap = vmap
+
+uncurry3 :: (a -> b -> c -> d) -> (a, b, c) -> d
+uncurry3 f (a, b, c) = f a b c
