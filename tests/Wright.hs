@@ -1,9 +1,5 @@
-import qualified Numeric.Matrix as M (Matrix(..), fromList)
-import Data.Wright (Colour(..))
-import Data.Wright.RGB.Model.SRGB (sRGB)
-import Data.Wright.CIE.LAB ()
-import Data.Wright.RGB ()
-import Data.Wright.Types (LAB(..), RGB(..), XYZ(..), ℝ)
+import Data.Wright (Colour(..), sRGB, LAB(..), RGB(..), XYZ(..), ℝ)
+import Data.Vector (Vector(..), fromVector, toVector)
 import Test.Assert (runAssertions)
 import Control.Applicative ((<$>))
 import System.FilePath (splitFileName)
@@ -11,8 +7,6 @@ import System.Environment (getExecutablePath)
 import Control.Lens (over, mapped, _2)
 import Approximate (Approximate(..))
 import CSV (parse)
-import Data.Matrix
-import Data.Vector
  
 ofLength :: Int -> [a] -> [[a]]
 ofLength n as = if null a then [b] else b : ofLength n a

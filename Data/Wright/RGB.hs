@@ -1,7 +1,7 @@
 module Data.Wright.RGB where
 
 import Control.Applicative ((<$>))
-import Data.Wright (Colour(..))
+import Data.Wright.Colour (Colour(..))
 import Data.Wright.RGB.Matrix (m)
 import Data.Wright.Types
 import qualified Numeric.Matrix as M (map)

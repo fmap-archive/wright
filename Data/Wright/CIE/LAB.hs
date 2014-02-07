@@ -1,6 +1,6 @@
 module Data.Wright.CIE.LAB where
 
-import Data.Wright (Colour(..))
+import Data.Wright.Colour (Colour(..))
 import Data.Wright.Types
 import Data.Vector (fromVector)
 
