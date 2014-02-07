@@ -13,7 +13,7 @@ README.litcoffee`.
         module Data.Wright.CIE.Illuminant.#{moduleName} (#{functionName}) where
 
         import Data.Wright.Types (Model)
-        import Data.Wright.CIE.Illuminant (environment)
+        import Data.Wright.CIE.Illuminant.Environment (environment)
 
         #{functionName} :: Model
         #{functionName} = environment (#{res['x']}, #{res['y']})
