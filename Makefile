@@ -1,21 +1,19 @@
-default: build
+default: 
 
-setup: wright.cabal Data Control
-	ghc Setup.hs
-
-build: setup 
-	./Setup --user configure
-	./Setup build 
+build: src/ wright.cabal
+	cabal configure 
+	cabal build
 
 install: build
-	./Setup install
+	cabal install
 
 clean: 
 	git clean -Xfd
 
-tests: install
-	find tests -name '*hs' | xargs -I+ ghc -itests +
+tests: 
+	cabal configure --enable-tests
+	cabal build
+	cp -r test/fixtures dist/build/wright-tests # hack
 
 test: tests
-	./tests/Convert
-	./tests/Diff
+	cabal test

@@ -1,3 +1,5 @@
+module Assertions.Transform (assertions) where
+
 import Data.Wright (Colour(..), sRGB, LAB(..), RGB(..), XYZ(..), Yxy(..), ℝ)
 import Data.Vector (Vector(..), fromVector, toVector)
 import Test.Assert (runAssertions)
@@ -5,8 +7,8 @@ import Control.Applicative ((<$>))
 import System.FilePath (splitFileName)
 import System.Environment (getExecutablePath)
 import Control.Lens (over, mapped, _2)
-import Approximate (Approximate(..))
-import CSV (parse)
+import Numeric.Approximate (Approximate(..))
+import Data.CSV (parse)
 
 type Fixture = (RGB ℝ, XYZ ℝ, LAB ℝ, Yxy ℝ)
  
@@ -22,8 +24,8 @@ parseFixtures = map parseFixture . parse
  where parseFixture = parseFixture' . ofLength 3 . map read
        parseFixture' [r,x,l,y] = (fromList r, fromList x, fromList l, fromList y)
 
-assertions :: [Fixture] -> [(String, Bool)]
-assertions fs = over (mapped . _2) (`all` fs) $
+generateAssertions :: [Fixture] -> [(String, Bool)]
+generateAssertions fs = over (mapped . _2) (`all` fs) $
   [ ("RGB --> XYZ", checkRGB2XYZ)
   , ("XYZ --> RGB", checkXYZ2RGB)
   , ("RGB --> LAB", checkRGB2LAB)
@@ -38,10 +40,10 @@ assertions fs = over (mapped . _2) (`all` fs) $
   , ("LAB --> Yxy", checkLAB2Yxy)
   ]
 
-main :: IO ()
-main = fst . splitFileName <$> getExecutablePath
-   >>= readFile . (++"fixtures/convert/conv.csv")
-   >>= runAssertions . assertions . parseFixtures
+assertions :: IO [(String, Bool)]
+assertions = fst . splitFileName <$> getExecutablePath
+         >>= readFile . (++"fixtures/convert/conv.csv")
+         >>= return . generateAssertions . parseFixtures
 
 checkRGB2XYZ :: (RGB ℝ, XYZ ℝ, LAB ℝ, Yxy ℝ) -> Bool
 checkRGB2XYZ (rgb, xyz, _, _) = xyz =~ toXYZ sRGB rgb

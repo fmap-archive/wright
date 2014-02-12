@@ -1,4 +1,4 @@
-module CSV (parse) where
+module Data.CSV (parse) where
 
 parse :: String -> [[String]]
 parse = map fields . lines

@@ -1,6 +1,6 @@
 {-# LANGUAGE FlexibleInstances #-}
 
-module Approximate where
+module Numeric.Approximate where
 
 import Data.Wright
 import Data.Vector

@@ -1,12 +1,14 @@
+module Assertions.Metric (assertions) where
+
 import Data.Wright (LAB, Model(..), Application(..), ℝ, cie76, cie94, cie2000)
-import Approximate (Approximate(..))
+import Numeric.Approximate (Approximate(..))
 import Data.Vector (Vector, fromVector, toVector)
 import Control.Lens (over, mapped, _2)
 import System.FilePath (splitFileName)
 import System.Environment (getExecutablePath)
 import Test.Assert (runAssertions)
 import Control.Applicative ((<$>))
-import CSV (parse)
+import Data.CSV (parse)
 
 type DE1976  = ℝ
 type DE1994T = ℝ
@@ -26,17 +28,18 @@ parseFixture = record . map read
 parseFixtures :: String -> [Fixture]
 parseFixtures = map parseFixture . parse
 
-assertions :: [Fixture] -> [(String, Bool)]
-assertions fs = over (mapped . _2) (`all` fs) $
+generateAssertions :: [Fixture] -> [(String, Bool)]
+generateAssertions fs = over (mapped . _2) (`all` fs) $
   [ ("ΔE, CIE76"            , checkCIE76)
   , ("ΔE, CIE94 (Graphics)" , checkCIE94G)
   , ("ΔE, CIE94 (Textiles)" , checkCIE94T)
   , ("ΔE, CIE2000"          , checkCIE2k)
   ]
 
-main = fst . splitFileName <$> getExecutablePath
-   >>= readFile . (++"fixtures/diff/diff.csv")
-   >>= runAssertions . assertions . parseFixtures
+assertions :: IO [(String, Bool)]
+assertions = fst . splitFileName <$> getExecutablePath
+         >>= readFile . (++"fixtures/diff/diff.csv")
+         >>= return . generateAssertions . parseFixtures
 
 model :: Model
 model = Model {}

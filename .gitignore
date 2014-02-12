@@ -1,6 +1,5 @@
 Setup
-tests/Convert
-tests/Diff
+test/wright-tests
 *.js
 dist/
 .cabal-sandbox/
