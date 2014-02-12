@@ -1,23 +1,13 @@
 module Assertions.Transform (assertions) where
 
 import Data.Wright (Colour(..), sRGB, LAB(..), RGB(..), XYZ(..), Yxy(..), ℝ)
-import Data.Vector (Vector(..), fromVector, toVector)
 import Test.Assert (runAssertions)
-import Control.Applicative ((<$>))
-import System.FilePath (splitFileName)
-import System.Environment (getExecutablePath)
 import Control.Lens (over, mapped, _2)
 import Numeric.Approximate (Approximate(..))
 import Data.CSV (parse)
+import Assertions.Shared (ofLength, fromList, getBaseDirectory)
 
 type Fixture = (RGB ℝ, XYZ ℝ, LAB ℝ, Yxy ℝ)
- 
-ofLength :: Int -> [a] -> [[a]]
-ofLength n as = if null a then [b] else b : ofLength n a
-  where (b, a) = (take n as, drop n as)
-
-fromList :: (Colour m, Vector m) => [ℝ] -> m ℝ
-fromList = fromVector . toVector
 
 parseFixtures :: String -> [Fixture]
 parseFixtures = map parseFixture . parse
@@ -41,7 +31,7 @@ generateAssertions fs = over (mapped . _2) (`all` fs) $
   ]
 
 assertions :: IO [(String, Bool)]
-assertions = fst . splitFileName <$> getExecutablePath
+assertions = getBaseDirectory
          >>= readFile . (++"fixtures/convert/conv.csv")
          >>= return . generateAssertions . parseFixtures
 

@@ -2,22 +2,16 @@ module Assertions.Metric (assertions) where
 
 import Data.Wright (LAB, Model(..), Application(..), ℝ, cie76, cie94, cie2000)
 import Numeric.Approximate (Approximate(..))
-import Data.Vector (Vector, fromVector, toVector)
 import Control.Lens (over, mapped, _2)
-import System.FilePath (splitFileName)
-import System.Environment (getExecutablePath)
 import Test.Assert (runAssertions)
-import Control.Applicative ((<$>))
 import Data.CSV (parse)
+import Assertions.Shared (fromList, getBaseDirectory)
 
 type DE1976  = ℝ
 type DE1994T = ℝ
 type DE1994G = ℝ
 type DE2000  = ℝ
 type Fixture = (LAB ℝ, LAB ℝ, DE1976, DE1994T, DE1994G, DE2000)
-
-fromList :: Vector v => [a] -> v a
-fromList = fromVector . toVector
 
 parseFixture :: [String] -> Fixture
 parseFixture = record . map read
@@ -37,7 +31,7 @@ generateAssertions fs = over (mapped . _2) (`all` fs) $
   ]
 
 assertions :: IO [(String, Bool)]
-assertions = fst . splitFileName <$> getExecutablePath
+assertions = getBaseDirectory
          >>= readFile . (++"fixtures/diff/diff.csv")
          >>= return . generateAssertions . parseFixtures
 
