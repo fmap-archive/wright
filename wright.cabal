@@ -15,8 +15,8 @@ cabal-version:  >=1.10
 library
   hs-source-dirs:      src
   exposed-modules:     Data.Wright, 
-                       Data.Vector,
-                       Data.Matrix,
+                       Data.Vector
+  other-modules:       Data.Matrix,
                        Data.Wright.Types,
                        Data.Wright.Colour,
                        Data.Wright.RGB,
