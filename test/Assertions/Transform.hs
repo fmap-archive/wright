@@ -5,7 +5,8 @@ import Test.Assert (runAssertions)
 import Control.Lens (over, mapped, _2)
 import Numeric.Approximate (Approximate(..))
 import Data.CSV (parse)
-import Assertions.Shared (ofLength, fromList, getBaseDirectory)
+import Assertions.Shared (ofLength, fromList)
+import Paths_wright (getDataFileName)
 
 type Fixture = (RGB ℝ, XYZ ℝ, LAB ℝ, Yxy ℝ)
 
@@ -31,8 +32,8 @@ generateAssertions fs = over (mapped . _2) (`all` fs) $
   ]
 
 assertions :: IO [(String, Bool)]
-assertions = getBaseDirectory
-         >>= readFile . (++"fixtures/convert/conv.csv")
+assertions = getDataFileName "test/fixtures/convert/conv.csv"
+         >>= readFile
          >>= return . generateAssertions . parseFixtures
 
 checkRGB2XYZ :: (RGB ℝ, XYZ ℝ, LAB ℝ, Yxy ℝ) -> Bool

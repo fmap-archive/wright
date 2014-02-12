@@ -5,7 +5,8 @@ import Numeric.Approximate (Approximate(..))
 import Control.Lens (over, mapped, _2)
 import Test.Assert (runAssertions)
 import Data.CSV (parse)
-import Assertions.Shared (fromList, getBaseDirectory)
+import Assertions.Shared (fromList)
+import Paths_wright (getDataFileName)
 
 type DE1976  = ℝ
 type DE1994T = ℝ
@@ -31,8 +32,8 @@ generateAssertions fs = over (mapped . _2) (`all` fs) $
   ]
 
 assertions :: IO [(String, Bool)]
-assertions = getBaseDirectory
-         >>= readFile . (++"fixtures/diff/diff.csv")
+assertions = getDataFileName "test/fixtures/diff/diff.csv"
+         >>= readFile 
          >>= return . generateAssertions . parseFixtures
 
 model :: Model
